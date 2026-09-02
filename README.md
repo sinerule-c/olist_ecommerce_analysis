@@ -111,6 +111,30 @@ LIMIT 5;
 
 ### Task 5: Find customers who placed more than one order. Show customer_unique_id and their order count, highest first.
 
+```
+SELECT
+	c.customer_unique_id,
+    COUNT(o.order_id) AS order_count
+FROM customers c
+JOIN orders o
+ON c.customer_id = o.customer_id
+GROUP BY c.customer_unique_id
+HAVING COUNT(o.order_id) > 1
+ORDER BY order_count DESC;
+```
+| customer_unique_id | order_count |
+|--------------------|-------------|
+| 8d50f5eadf50201ccdcedfb9e2ac8455 | 17 |
+| 3e43e6105506432c953e165fb2acf44c | 9 |
+| 1b6c7548a2a1f9037c1fd3ddfed95f33 | 7 |
+| 6469f99c1f9dfae7733b25662e7f1782 | 7 |
+| ca77025e7201e3b30c44b472ff346268 | 7 |
+| 12f5d6e1cbf93dafd9dcc19095df0b3d | 6 |
+| 47c1a3033b8b77b3ab6e109eb4d5fdf3 | 6 |
+.
+..
+...
+
 <br>
 
 ### Task 6: For each state, calculate the percentage of its orders marked 'unavailable'. Include only states with at least 1,000 total orders. Sort by percentage, highest first.
