@@ -1,5 +1,9 @@
 # Olist Ecommerce Analysis
 
+Dataset: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce/data
+
+## SQL
+
 ### Task 1: Count orders for each order_status. Show the most common status first.
 ```
 SELECT
@@ -153,6 +157,7 @@ HAVING COUNT(order_id) >= 1000
 ORDER BY percentage_unavailable DESC;
 ```
 | customer_state | percentage_unavailable |
+|----------------|------------------------|
 | PR | 0.79 |
 | SP | 0.70 |
 | MG | 0.64 |
