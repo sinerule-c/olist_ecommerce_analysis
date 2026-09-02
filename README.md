@@ -22,7 +22,7 @@ ORDER BY total_orders DESC;
 | created | 5 | 0.01 |
 | approved | 2 | 0.00 |
 
-
+<br>
 
 ### Task 2: Show total orders, delivered orders, and the percentage of orders marked 'delivered'. Round the percentage to 2 decimal places.
 
