@@ -138,3 +138,31 @@ ORDER BY order_count DESC;
 <br>
 
 ### Task 6: For each state, calculate the percentage of its orders marked 'unavailable'. Include only states with at least 1,000 total orders. Sort by percentage, highest first.
+
+```
+SELECT
+	c.customer_state,
+    ROUND(
+		COUNT(CASE WHEN o.order_status = 'unavailable' THEN 1 END)/COUNT(*) * 100
+        , 2) AS percentage_unavailable
+FROM customers c
+JOIN orders o
+ON c.customer_id = o.customer_id
+GROUP BY c.customer_state
+HAVING COUNT(order_id) >= 1000
+ORDER BY percentage_unavailable DESC;
+```
+| customer_state | percentage_unavailable |
+| PR | 0.79 |
+| SP | 0.70 |
+| MG | 0.64 |
+| BA | 0.59 |
+| DF | 0.56 |
+| RJ | 0.53 |
+| SC | 0.49 |
+| GO | 0.45 |
+| CE | 0.45 |
+| RS | 0.44 |
+| ES | 0.30 |
+| PE | 0.24 |
+
