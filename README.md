@@ -88,6 +88,25 @@ ORDER BY purchase_year ASC, purchase_month ASC;
 
 ### Task 4: Find the top 5 customer states by number of orders. Show customer_state and the order count.
 
+```
+SELECT
+	c.customer_state,
+    COUNT(*) AS order_count
+FROM orders o
+JOIN customers c
+ON o.customer_id = c.customer_id
+GROUP BY c.customer_state
+ORDER BY order_count DESC
+LIMIT 5;
+```
+| customer_state | order_count |
+|----------------|-------------|
+| SP | 41746 |
+| RJ | 12852 |
+| MG | 11635 |
+| RS | 5466 |
+| PR | 5045 |
+
 <br>
 
 ### Task 5: Find customers who placed more than one order. Show customer_unique_id and their order count, highest first.
