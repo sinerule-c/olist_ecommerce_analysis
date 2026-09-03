@@ -188,10 +188,10 @@ ORDER BY total_item_value DESC, total_freight DESC;
 | order_id | item_count | total_item_value | total_freight |
 |---|---|---|---|
 | 03caa2c082116e1d31e67e9ae3700499 | 8 | 13440.00 | 224.08 |
-| 736e1922ae60d0d6a89247b851902527 | 4 | 7160.00	114.88 |
-| 0812eb902a67711a1cb742b3cdaa65ae | 1 | 6735.00	194.31 |
-| fefacc66af859508bf1a7934eab1e97f | 1 | 6729.00	193.21 |
-| f5136e38d1a14a4dbd87dff67da82701 | 1 | 6499.00	227.66 |
+| 736e1922ae60d0d6a89247b851902527 | 4 | 7160.00 | 114.88 |
+| 0812eb902a67711a1cb742b3cdaa65ae | 1 | 6735.00 | 194.31 |
+| fefacc66af859508bf1a7934eab1e97f | 1 | 6729.00 | 193.21 |
+| f5136e38d1a14a4dbd87dff67da82701 | 1 | 6499.00 | 227.66 |
 .
 ..
 ...
@@ -199,6 +199,33 @@ ORDER BY total_item_value DESC, total_freight DESC;
 <br>
 
 ### Task 8: For delivered orders only, find the top 10 sellers by total item value. Also show their item count and average item price.
+
+```
+SELECT
+    a.seller_id,
+    COUNT(*) AS total_count,
+    ROUND(SUM(a.price), 2) AS total_price,
+    ROUND(AVG(a.price), 2) AS average_price
+FROM order_items a
+JOIN orders b
+ON a.order_id = b.order_id
+WHERE b.order_status = 'delivered'
+GROUP BY a.seller_id
+ORDER BY total_count DESC
+LIMIT 10;
+```
+| seller_id | total_count | total_price | average_price |
+|---|---|---|---|
+| 6560211a19b47992c3666cc44a7e94c0 | 1996 | 120702.83 | 60.47 |
+| 4a3ca9315b744ce9f8e9374361493884 | 1949 | 196882.12 | 101.02 |
+| 1f50f920176fa81dab994f9023523100 | 1926 | 106655.71 | 55.38 |
+| cc419e0650a3c5ba77189a1882b7556a | 1719 | 101090.96 | 58.81 |
+| da8622b14eb17ae2831f4ac5b9dab84a | 1548 | 159816.87 | 103.24 |
+| 955fee9216a65b617aa5c0531780ce60 | 1472 | 131836.71 | 89.56 |
+| 1025f0e2d44d7041d6cf58b6550e0bfa | 1420 | 138208.56 | 97.33 |
+| 7c67e1448b00f6e969d365cea6b010ab | 1355 | 186570.05 | 137.69 |
+| ea8482cd71df3c1969d7b9473ff13abc | 1188 | 36696.76 | 30.89 |
+| 7a67c85e85bb2ce8582c35f2203ad736 | 1155 | 139658.69 | 120.92 |
 
 <br>
 
