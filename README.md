@@ -261,3 +261,45 @@ ORDER BY total_item_value DESC;
 <br>
 
 ### Task 10: Calculate the average item value per delivered order for each customer state. Be careful: average item price is not average order value!
+
+```
+SELECT
+	a.customer_state,
+    ROUND((SUM(c.price)/COUNT(DISTINCT c.order_id)), 2) AS average_order_value
+FROM customers a
+JOIN orders b
+	ON a.customer_id = b.customer_id
+JOIN order_items c
+	ON b.order_id = c.order_id
+WHERE b.order_status = 'delivered'
+GROUP BY a.customer_state;
+```
+| customer_state | average_order_value |
+|-|-|
+| AC | 199.14 |
+| AL | 198.63 |
+| AM | 152.80 |
+| AP | 199.62 |
+| BA | 151.59 |
+| CE | 171.82 |
+| DF | 142.55 |
+| ES | 134.66 |
+| GO | 144.53 |
+| MA | 163.19 |
+| MG | 136.73 |
+| MS | 164.66 |
+| MT | 171.77 |
+| PA | 184.43 |
+| PB | 217.77 |
+| PE | 158.12 |
+| PI | 177.99 |
+| PR | 135.30 |
+| RJ | 142.48 |
+| RN | 173.22 |
+| RO | 187.99 |
+| RR | 172.13 |
+| RS | 136.37 |
+| SC | 142.98 |
+| SE | 168.88 |
+| SP | 125.12 |
+| TO | 176.65 |
