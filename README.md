@@ -231,6 +231,33 @@ LIMIT 10;
 
 ### Task 9: For delivered orders only, show each customer state’s distinct order count, item count, and total item value. Sort by total item value, highest first.
 
+```
+SELECT
+	a.customer_state,
+    COUNT(DISTINCT b.order_id) AS order_count,
+    COUNT(*) AS item_count,
+    ROUND(SUM(c.price), 2) AS total_item_value
+FROM customers a
+JOIN orders b
+	ON a.customer_id = b.customer_id
+JOIN order_items c
+	ON b.order_id = c.order_id
+WHERE order_status = 'delivered'
+GROUP BY a.customer_state
+ORDER BY total_item_value DESC;
+```
+| customer_state | order_count | item_count | total_item_value |
+|-|-|-|-|
+| SP | 40501 | 46448 | 5067633.16 |
+| RJ | 12350 | 14143 | 1759651.13 |
+| MG | 11354 | 12916 | 1552481.83 |
+| RS | 5345 | 6134 | 728897.47 |
+| PR | 4923 | 5649 | 666063.51 |
+| SC | 3546 | 4097 | 507012.13 |
+| BA | 3256 | 3683 | 493584.14 |
+| DF | 2080 | 2355 | 296498.41 |
+
+
 <br>
 
 ### Task 10: Calculate the average item value per delivered order for each customer state. Be careful: average item price is not average order value!
