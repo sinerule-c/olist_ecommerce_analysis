@@ -171,3 +171,39 @@ ORDER BY percentage_unavailable DESC;
 | ES | 0.30 |
 | PE | 0.24 |
 
+<br>
+
+### Task 7: Using only order_items, show each order’s item count, total item value, and total freight. Sort by total item value, highest first.
+
+```
+SELECT
+    order_id,
+    COUNT(*) AS item_count,
+    ROUND(SUM(price), 2) AS total_item_value,
+    ROUND(SUM(freight_value), 2) AS total_freight
+FROM order_items
+GROUP BY order_id
+ORDER BY total_item_value DESC, total_freight DESC;
+```
+| order_id | item_count | total_item_value | total_freight |
+|---|---|---|---|
+| 03caa2c082116e1d31e67e9ae3700499 | 8 | 13440.00 | 224.08 |
+| 736e1922ae60d0d6a89247b851902527 | 4 | 7160.00	114.88 |
+| 0812eb902a67711a1cb742b3cdaa65ae | 1 | 6735.00	194.31 |
+| fefacc66af859508bf1a7934eab1e97f | 1 | 6729.00	193.21 |
+| f5136e38d1a14a4dbd87dff67da82701 | 1 | 6499.00	227.66 |
+.
+..
+...
+
+<br>
+
+### Task 8: For delivered orders only, find the top 10 sellers by total item value. Also show their item count and average item price.
+
+<br>
+
+### Task 9: For delivered orders only, show each customer state’s distinct order count, item count, and total item value. Sort by total item value, highest first.
+
+<br>
+
+### Task 10: Calculate the average item value per delivered order for each customer state. Be careful: average item price is not average order value!
